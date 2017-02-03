@@ -1,0 +1,30 @@
+{
+  "name": "redis-cookbook",
+  "description": "Installs/Configures redis-cookbook",
+  "long_description": "redis-cookbook\n------------------\n\nThis cookbook provides a basic Redis install and config.\n\nRequirements\n------------\n* [vagrant](http://downloads.vagrantup.com/) >= 1.2.0\n* [berkshelf](http://berkshelf.com/) >= 2.0.0\n* [vagrant-berkshelf plugin](https://github.com/RiotGames/vagrant-berkshelf) >= 1.3.3\n\nUsage\n-----\n\nInclude the recipe in your `run_list`:\n\n````\n'recipe[redis-cookbook]'\n````\n\nAttributes\n----------\n\n````\ndefault['redis']['daemonize']         = 'yes'\ndefault['redis']['pid']               = '/var/run/redis.pid'\ndefault['redis']['port']              = '6379'\ndefault['redis']['bind']              = '0.0.0.0'\ndefault['redis']['timeout']           = '300'\ndefault['redis']['loglevel']          = 'notice'\ndefault['redis']['logfile']           = '/var/log/redis/redis-server.log'\ndefault['redis']['databases']         = '16'\ndefault['redis']['rdbcompression']    = 'yes'\ndefault['redis']['dbfilename']        = 'dump.rdb'\ndefault['redis']['dir']               = '/var/lib/redis'\n````\n\nRecipes\n-------\n\ndefault.rb - Install the Redis Server.\n\nContributing\n------------\n\n1. Fork the repository on Github\n2. Create a named feature branch (like `add_component_x`)\n3. Write your change\n4. Write tests for your change (if applicable)\n5. Run the tests, ensuring they all pass\n6. Submit a Pull Request using Github\n\nLicense and Authors\n-------------------\nLicense: See LICENSE\nAuthors: gregpalmier\n",
+  "maintainer": "gregpalmier",
+  "maintainer_email": "gregpalmier@gmail.com",
+  "license": "All rights reserved",
+  "platforms": {
+  },
+  "dependencies": {
+    "apt": ">= 0.0.0"
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+  },
+  "groupings": {
+  },
+  "recipes": {
+  },
+  "version": "0.2.1"
+}

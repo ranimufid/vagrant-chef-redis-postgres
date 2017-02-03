@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+#^syntax detection
+
+site 'https://supermarket.getchef.com/api/v1'
+
+cookbook 'apt'
+cookbook 'application'
+cookbook 'application_ruby'
+cookbook 'ruby_build'
+cookbook 'user'
+cookbook 'ssh_known_hosts'
+cookbook 'poise'
+cookbook 'poise-service'
+cookbook 'poise-ruby'
+cookbook 'yum-epel'
+cookbook 'compat_resource'
+cookbook 'poise-languages'
+cookbook 'poise-archive'
+cookbook 'runit'
+cookbook 'chef-postgresql', :git => "https://github.com/phlipper/chef-postgresql.git"
+cookbook 'postgresql'#, :git => "https://github.com/sous-chefs/postgresql.git"
+cookbook 'redis-cookbook'
