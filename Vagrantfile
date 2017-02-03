@@ -32,7 +32,15 @@ Vagrant.configure("2") do |config|
   # Installs postgresql from recipe
   config.vm.provision "chef_solo" do |chef|
       chef.cookbooks_path = ['cookbooks','custom_cookbook']
-      chef.add_recipe 'postgresql'
+      chef.add_recipe 'postgresql::server'
+      # chef.add_recipe "postgresql::server"
+      chef.json = {
+        "postgresql" => {
+        "password" => {
+        "postgres" => "redshift#213"
+      }
+    }
+  }
   end
 
   # Install redis from recipe

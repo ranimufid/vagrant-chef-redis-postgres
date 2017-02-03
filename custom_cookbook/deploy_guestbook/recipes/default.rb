@@ -19,11 +19,11 @@ include_recipe 'ruby_build'
   package pkg
 end
 
-ruby_build_ruby '2.2.5'
+# ruby_build_ruby '2.2.5'
 
-link "/usr/bin/ruby" do
-  to "/usr/local/ruby/2.1.2/bin/ruby"
-end
+# link "/usr/bin/ruby" do
+#   to "/usr/local/ruby/2.1.2/bin/ruby"
+# end
 
 ssh_known_hosts_entry 'github.com'
 
