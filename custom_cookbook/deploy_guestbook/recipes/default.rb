@@ -6,24 +6,13 @@
 #
 # All rights reserved - Do Not Redistribute
 #
-  # ensure the local APT package cache is up to date
-  # include_recipe 'apt'
-  # install ruby_build tool which we will use to build ruby
-  # include_recipe 'ruby_build'
-  # include_recipe 'application'
-  # include_recipe 'application_ruby'
+
 include_recipe 'ruby_build'
 
 # OS Dendencies
 %w(git ruby-dev build-essential libsqlite3-dev libssl-dev libpq-dev).each do |pkg|
   package pkg
 end
-
-# ruby_build_ruby '2.2.5'
-
-# link "/usr/bin/ruby" do
-#   to "/usr/local/ruby/2.1.2/bin/ruby"
-# end
 
 ssh_known_hosts_entry 'github.com'
 
@@ -51,15 +40,11 @@ ssh_known_hosts_entry 'github.com'
     owner 'chefdeploy'
     group 'chefdeploy'
     path '/home/chefdeploy/app'
-    # revision 'chef_demo'
-    # repository 'https://github.com/askcharlie/guestbook.git'
-    # execute "install and setup rvm" do
-    #   command "if [ $(which rvm) == \"/usr/share/rvm/bin/rvm\" ]; then sudo apt-add-repository -y ppa:rael-gc/rvm && sudo apt-get update && sudo apt-get install rvm -y && reset && rvm install ruby-2.2.5; fi"
-    # end
+
     execute "clone repo" do
       command "cd /home/chefdeploy/app && if [ ! -d guestbook ]; then git clone https://github.com/askcharlie/guestbook.git; fi && ruby --version && cd guestbook && bundle install"
     end
-    execute "exporting env variables" do
+    execute "exporting env variables + db migrate" do
       command "export REDIS_HOST=localhost && export DATABASE_URL=\"postgres://rails_app:Nfz98ukfki7Df2UbV8H@localhost/guestbook\" && cd /home/chefdeploy/app/guestbook && bundle exec rake db:migrate"
     end
     # execute "db migrate" do

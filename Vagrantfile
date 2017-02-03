@@ -10,14 +10,12 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 9292, host: 3000
   # Automatically assign an IP address from the reserved address space to the provisioned machine
   config.vm.network "private_network", type: "dhcp"
-  # Enables the usage of berkshelf
-  # config.berkshelf.enabled = true
   # Prevents vagrant from checking for vm updates everytime vagrant up is executed
   config.vm.box_check_update = false
-  # Limits the provisioned box to 5GB of memory and 4 CPUs from host machine
+  # Limits the provisioned box to 2GB of memory and 1 CPUs from host machine
   config.vm.provider "virtualbox" do |vb|
-    vb.memory = "5120"
-    vb.cpus = 4
+    vb.memory = "2048"
+    vb.cpus = 1
   end
 
   # Helps us get over the no-tty issue
@@ -33,7 +31,6 @@ Vagrant.configure("2") do |config|
   config.vm.provision "chef_solo" do |chef|
       chef.cookbooks_path = ['cookbooks','custom_cookbook']
       chef.add_recipe 'postgresql::server'
-      # chef.add_recipe "postgresql::server"
       chef.json = {
         "postgresql" => {
         "password" => {
@@ -49,6 +46,7 @@ Vagrant.configure("2") do |config|
       chef.add_recipe 'redis-cookbook'
   end
 
+  # Creates required credentials for guestbook app on postgres
   config.vm.provision "shell", inline: <<-SHELL
   # Create Role and login
   echo "CREATE USER rails_app WITH PASSWORD 'Nfz98ukfki7Df2UbV8H';" | sudo -u postgres psql
@@ -89,29 +87,8 @@ Vagrant.configure("2") do |config|
     RECIPE
   end
 
-
-  # config.vm.provision "shell", inline: <<-SHELL
-  #  if [ $(redis-cli ping) == "PONG" ]; then echo "Redis exists"; exit 0; fi
-  #   sudo apt-get install tcl8.5
-  #   cd ~/ && wget http://download.redis.io/releases/redis-stable.tar.gz
-  #   tar xzf redis-stable.tar.gz
-  #   cd redis-stable
-  #   make
-  #   make test
-  #   sudo make install
-  #   cd utils
-  #   sudo ./install_server.sh
-  #   sudo cp /etc/redis/redis.conf /etc/redis/redis.conf.old
-  #   sudo cat /etc/redis/redis.conf.old | grep -v bind > /etc/redis/redis.conf
-  #   echo "bind 0.0.0.0" >> /etc/redis/redis.conf
-  #   sudo service redis_6379 restart
-  # SHELL
-
-
   config.vm.provision "chef_solo" do |chef|
         chef.cookbooks_path = ['cookbooks','custom_cookbook']
-         # chef.run_list = ['recipe[ruby_build]', 'recipe[user]', 'recipe[application_ruby]','recipe[application]','recipe[ssh_known_hosts]','recipe[poise]','recipe[poise-service]','recipe[poise-ruby]','recipe[yum-epel]','recipe[compat_resource]','recipe[poise-languages]','recipe[poise-archive]']
-        # chef.add_recipe 'rvm'
         chef.add_recipe 'deploy_guestbook'
     end
 
