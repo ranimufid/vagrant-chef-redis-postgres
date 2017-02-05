@@ -13,4 +13,4 @@ MacOS:
     ```gem install librarian-chef```
  3. Startup application:
     ```vagrant up --provision```
- 4. Goto `localhost:3000` on your browser to access guestbook application
+ 4. Goto `http://localhost:3000` on your browser to access guestbook application
