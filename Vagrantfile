@@ -72,9 +72,6 @@ Vagrant.configure("2") do |config|
   # Gives the vagrant user permission to execute docker commands without the need for sudo
   config.vm.provision "chef_apply" do |chef|
     chef.recipe = <<-RECIPE
-
-      package 'awscli'
-
       group 'docker'
 
       bash 'docker_sudoer' do

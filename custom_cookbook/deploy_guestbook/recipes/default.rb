@@ -47,17 +47,8 @@ ssh_known_hosts_entry 'github.com'
     execute "exporting env variables + db migrate" do
       command "export REDIS_HOST=localhost && export DATABASE_URL=\"postgres://rails_app:Nfz98ukfki7Df2UbV8H@localhost/guestbook\" && cd /home/chefdeploy/app/guestbook && bundle exec rake db:migrate"
     end
-    # execute "db migrate" do
-    #   command "cd /home/chefdeploy/app/guestbook && bundle exec rake db:migrate" # && puma &"
-    # end
     execute "server restart" do
       command "export REDIS_HOST=localhost && export DATABASE_URL=\"postgres://rails_app:Nfz98ukfki7Df2UbV8H@localhost/guestbook\" && cd /home/chefdeploy/app/guestbook && if [[ $(lsof -i tcp:9292 | awk 'NR!=1 {print $2}') ]]; then lsof -i tcp:9292 | awk 'NR!=1 {print $2}' | xargs kill; fi && puma -d" # && puma &"
     end
-  # rails do
-  #     bundler true
-  #   end
 
-  #  unicorn do
-  #     worker_processes 2
-  #   end
   end
