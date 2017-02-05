@@ -9,7 +9,7 @@ MacOS:
 
 # Installation & Setup
  1. Clone repo && ```cd vagrant-chef-redis-postgres```
- 2. Install vagrant plugins `vagrant-librarian-chef` and `vagrant-vbguest` using: ```vagrant plugin install vagrant-librarian-chef vagrant-vbguest```:
+ 2. Install vagrant plugins `vagrant-librarian-chef` and `vagrant-vbguest` using: ```vagrant plugin install vagrant-librarian-chef vagrant-vbguest```
  3. Startup application:
     ```vagrant up --provision```
  4. Goto `http://localhost:3000` on your browser to access guestbook application
